@@ -1,9 +1,11 @@
 [package]
 authors = ["cyqsimon"]
 description = "Making Rust a true modern language™️ with revolutionary macros."
+documentation = "https://docs.rs/zoomer"
 edition = "2021"
 license = "MIT"
 name = "zoomer"
-version = "0.1.1"
+repository = "https://github.com/cyqsimon/zoomer-rs"
+version = "0.1.2"
 
 [dependencies]
