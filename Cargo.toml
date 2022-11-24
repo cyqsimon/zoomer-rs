@@ -1,0 +1,7 @@
+[package]
+description = "Just your casual name-squatting crate. I'll be doing something fun with it later."
+edition = "2021"
+name = "zoomer"
+version = "0.1.0"
+
+[dependencies]
