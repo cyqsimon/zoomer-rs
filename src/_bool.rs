@@ -1,5 +1,5 @@
 #[macro_export]
-/// Only boomers use true.
+/// Only boomers use `true`.
 macro_rules! nocap {
     () => {
         true
@@ -7,38 +7,38 @@ macro_rules! nocap {
 }
 
 #[macro_export]
-/// Only boomers use false.
+/// Only boomers use `false`.
 macro_rules! cap {
     () => {
         false
     };
 }
 
-/// # **BEST RNG EVER**
-/// 0 <= return_value < n
-/// 
-/// # Panics
-/// Only if `n == 0`,
-/// because you can't have a number *equal AND not equal to 0*
-fn ultimate_rng(n: u128) -> u128 {
-    use std::time;
-    // guard clause, for speed
-    if n == 1 { return 0 };
-    match time::SystemTime::now().duration_since(time::UNIX_EPOCH) {
-        Ok(d) => d.as_nanos() % n,
-        Err(_) => 0
-    }
-}
-
-fn rand_cap() -> bool {
-    ultimate_rng(2) == 0
+#[macro_export]
+/// fake news!
+macro_rules! fake {
+    () => {
+        false
+    };
 }
 
 #[macro_export]
 /// Who needs certainty?
 macro_rules! maybe_bro {
     () => {
-        rand_cap()
+        match std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH)
+        {
+            Ok(d) => d.as_nanos() % 2,
+            Err(_) => 0
+        } == 1 // 1 is truthy, 0 is falsy
+    };
+}
+
+#[macro_export]
+/// yesn't
+macro_rules! yesnt {
+    () => {
+        maybe_bro!()
     };
 }
 
@@ -46,6 +46,8 @@ macro_rules! maybe_bro {
 mod test {
     #[test]
     fn it_builds_exclam() {
-        let _ = cap!() || nocap!() || maybe_bro!() == true;
+        let _ = cap!() || nocap!() ||
+            fake!() || maybe_bro!() || yesnt!()
+            == true;
     }
 }
