@@ -15,7 +15,7 @@ macro_rules! cap {
 }
 
 /// # **BEST RNG EVER**
-/// Return value is in the interval 0 <= out < n.
+/// 0 <= return_value < n
 /// 
 /// # Panics
 /// Only if `n == 0`,
