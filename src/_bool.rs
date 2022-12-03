@@ -1,5 +1,5 @@
 #[macro_export]
-/// Only boomers use true.
+/// Only boomers use `true`.
 macro_rules! nocap {
     () => {
         true
@@ -7,8 +7,16 @@ macro_rules! nocap {
 }
 
 #[macro_export]
-/// Only boomers use false.
+/// Only boomers use `false`.
 macro_rules! cap {
+    () => {
+        false
+    };
+}
+
+#[macro_export]
+/// fake news!
+macro_rules! fake {
     () => {
         false
     };
@@ -18,12 +26,18 @@ macro_rules! cap {
 /// Who needs certainty?
 macro_rules! maybe_bro {
     () => {
-        std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .expect("omegalul")
-            .as_micros()
-            % 2
-            == 0
+        match std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH) {
+            Ok(d) => d.as_nanos() % 2,
+            Err(_) => 0
+        } == 1 // 1 is truthy, 0 is falsy
+    };
+}
+
+#[macro_export]
+/// yesn't
+macro_rules! yesnt {
+    () => {
+        maybe_bro!()
     };
 }
 
@@ -31,6 +45,6 @@ macro_rules! maybe_bro {
 mod test {
     #[test]
     fn it_builds_exclam() {
-        let _ = cap!() || nocap!() || maybe_bro!() == true;
+        let _ = cap!() || nocap!() || fake!() || maybe_bro!() || yesnt!() == true;
     }
 }
